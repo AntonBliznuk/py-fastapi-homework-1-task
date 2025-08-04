@@ -33,9 +33,6 @@ async def get_movies(
     )
     movies = result.scalars().all()
 
-    if not movies:
-        raise HTTPException(status_code=404, detail="No movies found.")
-
     return MovieListResponseSchema(
         movies=[MovieRead.from_orm(m) for m in movies],
         prev_page=prev_page,
